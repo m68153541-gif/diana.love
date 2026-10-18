@@ -109,7 +109,7 @@
   .buttons {
     margin-top: 30px;
     display: flex;
-    gap: 14px;
+    gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
   }
@@ -117,10 +117,10 @@
     flex: 1;
     min-width: 100px;
     max-width: 150px;
-    padding: 16px 10px;
+    padding: 15px 10px;
     border: none;
     border-radius: 16px;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
     cursor: pointer;
     letter-spacing: .5px;
@@ -133,30 +133,21 @@
     background: linear-gradient(135deg, #ff4d8d, #ff7eb3);
     box-shadow: 0 10px 26px rgba(255, 77, 141, .5);
   }
-  .btn-yes:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 14px 32px rgba(255, 77, 141, .65);
-  }
+  .btn-yes:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 32px rgba(255, 77, 141, .65); }
 
   .btn-no {
     color: #7b2d4e;
     background: linear-gradient(135deg, #ffffff, #ffe3ee);
     box-shadow: 0 10px 26px rgba(255, 255, 255, .45);
   }
-  .btn-no:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 14px 32px rgba(255, 255, 255, .6);
-  }
+  .btn-no:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 32px rgba(255, 255, 255, .6); }
 
   .btn-back {
     color: #fff;
     background: linear-gradient(135deg, #8e7cc3, #a29bfe);
     box-shadow: 0 10px 26px rgba(142, 124, 195, .5);
   }
-  .btn-back:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 14px 32px rgba(142, 124, 195, .65);
-  }
+  .btn-back:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 32px rgba(142, 124, 195, .65); }
 
   .answer {
     margin-top: 22px;
@@ -169,13 +160,10 @@
     transform: translateY(8px);
     transition: opacity .4s ease, transform .4s ease;
   }
-  .answer.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .answer.show { opacity: 1; transform: translateY(0); }
   .answer .emoji { font-size: 20px; }
 
-  /* Экран "Конец" */
+  /* ===== ЭКРАН "КОНЕЦ" ===== */
   .end-screen {
     position: fixed;
     inset: 0;
@@ -215,11 +203,166 @@
     max-width: 320px;
   }
 
-  .end-screen .end-hearts {
-    margin-top: 22px;
-    font-size: 28px;
-    letter-spacing: 8px;
-    animation: beat 1.4s ease-in-out infinite;
+  /* Кнопки на черном экране */
+  .end-actions {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 260px;
+  }
+  .end-btn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .end-btn:hover {
+    background: rgba(255, 255, 255, .1);
+    border-color: #fff;
+  }
+  .end-btn.primary {
+    background: linear-gradient(135deg, #ff4d8d, #ff7eb3);
+    border: none;
+    font-weight: 800;
+  }
+
+  /* ===== ЭКРАН МИНИ-ИГРЫ ===== */
+  .game-screen {
+    position: fixed;
+    inset: 0;
+    background: #111;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  .game-screen.active { display: flex; }
+
+  .game-ui {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+    pointer-events: none;
+    z-index: 1001;
+  }
+  .game-ui .score {
+    font-size: 20px;
+    font-weight: 800;
+    color: #ff4d8d;
+  }
+  .game-ui .timer {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .play-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .click-heart {
+    position: absolute;
+    font-size: 36px;
+    cursor: pointer;
+    user-select: none;
+    animation: heartSpawn .3s ease-out;
+    transition: transform .1s;
+  }
+  .click-heart:active { transform: scale(1.2); }
+  @keyframes heartSpawn {
+    from { transform: scale(0); }
+    to { transform: scale(1); }
+  }
+
+  /* Экран победы в игре */
+  .game-result {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.9);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    z-index: 1002;
+  }
+  .game-result.active { display: flex; }
+  .game-result h2 {
+    font-size: 24px;
+    color: #fff;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+  .game-result p {
+    font-size: 18px;
+    color: #ff4d8d;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+
+  /* Экран истории */
+  .history-screen, .thanks-screen {
+    position: fixed;
+    inset: 0;
+    background: #1a1a1a;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    z-index: 1003;
+  }
+  .history-screen.active, .thanks-screen.active { display: flex; }
+  
+  .history-screen h2 {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .history-screen p {
+    color: #a29bfe;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 320px;
+  }
+  .history-screen .support-btn {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: #fff;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 26px rgba(108, 92, 231, .5);
+  }
+  
+  .thanks-screen p {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    max-width: 300px;
   }
 </style>
 </head>
@@ -247,10 +390,10 @@
   <h1>Я надеюсь мы<br>друзья теперь?</h1>
   <p class="subtitle">Будь честна 💫</p>
 
-  <div class="buttons">
+  <div class="buttons" style="gap: 8px;">
     <button class="btn btn-yes" id="yesBtn2">Да 💘</button>
     <button class="btn btn-no" id="noBtn2">Нет 💔</button>
-    <button class="btn btn-back" id="backBtn2">Назад ↩️</button>
+    <button class="btn btn-back" id="backBtn2" style="flex: 0 0 100%; max-width: 100%; margin-top: 4px; font-size: 15px; padding: 12px;">Назад ↩️</button>
   </div>
 
   <div class="answer" id="answer2"></div>
@@ -260,7 +403,49 @@
 <div class="end-screen" id="endScreen">
   <div class="end-title">END</div>
   <div class="end-text">Теперь мы с Зюзей на одной волне 🤝</div>
-  <div class="end-hearts">💜🤝💜</div>
+  
+  <div class="end-actions">
+    <button class="end-btn primary" id="playGameBtn">🎮 Игра: Завоевать сердце</button>
+    <button class="end-btn" id="historyBtn">📖 Узнать историю</button>
+    <button class="end-btn" id="backBtn3">↩️ Вернуться в начало</button>
+  </div>
+</div>
+
+<!-- ===== ЭКРАН МИНИ-ИГРЫ ===== -->
+<div class="game-screen" id="gameScreen">
+  <div class="game-ui">
+    <div class="score">Счёт: <span id="gameScore">0</span></div>
+    <div class="timer">⏱ <span id="gameTimer">60</span>с</div>
+  </div>
+  <div class="play-area" id="playArea"></div>
+</div>
+
+<!-- ===== РЕЗУЛЬТАТ ИГРЫ ===== -->
+<div class="game-result" id="gameResult">
+  <h2>Теперь ты видишь на что я способен 😎</h2>
+  <p id="gameResultScore"></p>
+  <div class="end-actions">
+    <button class="end-btn primary" id="gameToStartBtn">Начать заново</button>
+    <button class="end-btn" id="gameBackBtn">↩️ Назад</button>
+  </div>
+</div>
+
+<!-- ===== ЭКРАН ИСТОРИИ ===== -->
+<div class="history-screen" id="historyScreen">
+  <h2>Об игре</h2>
+  <p>Игра создана при поддержке <b>zyza_zark</b> и <b>Андрей</b>.</p>
+  <button class="support-btn" id="supportBtn">❤️ Поддержать</button>
+  <div class="end-actions" style="max-width: 200px; margin: 0 auto;">
+    <button class="end-btn" id="historyBackBtn">↩️ Назад</button>
+  </div>
+</div>
+
+<!-- ===== ЭКРАН СПАСИБО ===== -->
+<div class="thanks-screen" id="thanksScreen">
+  <p>Спасибо вам! Но моя любовь меня не любит... 💔</p>
+  <div class="end-actions" style="max-width: 200px; margin: 0 auto;">
+    <button class="end-btn" id="thanksBackBtn">↩️ Назад</button>
+  </div>
 </div>
 
 <script>
@@ -283,6 +468,11 @@
   const endScreen = document.getElementById('endScreen');
   const answer1 = document.getElementById('answer1');
   const answer2 = document.getElementById('answer2');
+  
+  const gameScreen = document.getElementById('gameScreen');
+  const gameResult = document.getElementById('gameResult');
+  const historyScreen = document.getElementById('historyScreen');
+  const thanksScreen = document.getElementById('thanksScreen');
 
   // ---- Экран 1 ----
   document.getElementById('yesBtn1').addEventListener('click', () => {
@@ -311,6 +501,136 @@
 
   document.getElementById('backBtn2').addEventListener('click', () => {
     screen2.style.display = 'none';
+    screen1.style.display = 'block';
+    answer1.classList.remove('show');
+    answer1.innerHTML = '';
+  });
+
+  document.getElementById('backBtn3').addEventListener('click', () => {
+    endScreen.classList.remove('active');
+    screen1.style.display = 'block';
+    screen2.style.display = 'none';
+    answer1.classList.remove('show');
+    answer2.classList.remove('show');
+    answer1.innerHTML = '';
+    answer2.innerHTML = '';
+  });
+
+  // ---- Навигация по черному экрану ----
+  document.getElementById('playGameBtn').addEventListener('click', startGame);
+  
+  document.getElementById('historyBtn').addEventListener('click', () => {
+    endScreen.classList.remove('active');
+    historyScreen.classList.add('active');
+  });
+
+  document.getElementById('historyBackBtn').addEventListener('click', () => {
+    historyScreen.classList.remove('active');
+    endScreen.classList.add('active');
+  });
+
+  document.getElementById('supportBtn').addEventListener('click', () => {
+    historyScreen.classList.remove('active');
+    thanksScreen.classList.add('active');
+  });
+
+  document.getElementById('thanksBackBtn').addEventListener('click', () => {
+    thanksScreen.classList.remove('active');
+    historyScreen.classList.add('active');
+  });
+
+  // ---- МИНИ-ИГРА ----
+  let gameInterval, spawnInterval;
+  let score = 0;
+  let timeLeft = 60;
+  const playArea = document.getElementById('playArea');
+  const gameScoreEl = document.getElementById('gameScore');
+  const gameTimerEl = document.getElementById('gameTimer');
+  const gameResultScore = document.getElementById('gameResultScore');
+
+  function startGame() {
+    endScreen.classList.remove('active');
+    gameResult.classList.remove('active');
+    gameScreen.classList.add('active');
+    
+    score = 0;
+    timeLeft = 60;
+    gameScoreEl.textContent = score;
+    gameTimerEl.textContent = timeLeft;
+    playArea.innerHTML = '';
+
+    // Таймер
+    gameInterval = setInterval(() => {
+      timeLeft--;
+      gameTimerEl.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        endGame();
+      }
+    }, 1000);
+
+    // Спавн сердечек (каждые 100мс, чтобы за минуту появилось около 150 штук)
+    spawnInterval = setInterval(() => {
+      spawnHeart();
+    }, 100);
+  }
+
+  function spawnHeart() {
+    if (timeLeft <= 0) return;
+    
+    const heart = document.createElement('div');
+    heart.className = 'click-heart';
+    heart.textContent = '💖';
+    
+    // Позиция по X и Y (с учетом отступов)
+    const x = Math.random() * (window.innerWidth - 60);
+    const y = Math.random() * (window.innerHeight - 60);
+    
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+
+    heart.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if (timeLeft > 0) {
+        score++;
+        gameScoreEl.textContent = score;
+        heart.style.transform = 'scale(1.5)';
+        heart.style.opacity = '0';
+        setTimeout(() => heart.remove(), 100);
+      }
+    });
+
+    // Удаляем сердечко, если на него не нажали (живет 800мс)
+    setTimeout(() => {
+      if (heart.parentNode) {
+        heart.style.opacity = '0';
+        setTimeout(() => heart.remove(), 100);
+      }
+    }, 800);
+
+    playArea.appendChild(heart);
+  }
+
+  function endGame() {
+    clearInterval(gameInterval);
+    clearInterval(spawnInterval);
+    playArea.innerHTML = '';
+    gameScreen.classList.remove('active');
+    gameResult.classList.add('active');
+    
+    if (score >= 70) {
+      gameResultScore.textContent = `Отлично! Ты набрал ${score} сердечек.`;
+    } else {
+      gameResultScore.textContent = `Ты набрал ${score} сердечек. Нужно хотя бы 70!`;
+    }
+  }
+
+  document.getElementById('gameBackBtn').addEventListener('click', () => {
+    gameResult.classList.remove('active');
+    endScreen.classList.add('active');
+  });
+
+  document.getElementById('gameToStartBtn').addEventListener('click', () => {
+    gameResult.classList.remove('active');
     screen1.style.display = 'block';
     answer1.classList.remove('show');
     answer1.innerHTML = '';
