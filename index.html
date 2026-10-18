@@ -277,7 +277,7 @@
 
   .click-heart {
     position: absolute;
-    font-size: 36px;
+    font-size: 40px;
     cursor: pointer;
     user-select: none;
     animation: heartSpawn .3s ease-out;
@@ -568,10 +568,10 @@
       }
     }, 1000);
 
-    // Спавн сердечек (каждые 100мс, чтобы за минуту появилось около 150 штук)
+    // Спавн сердечек: теперь каждые 600 мс (медленнее и удобнее)
     spawnInterval = setInterval(() => {
       spawnHeart();
-    }, 100);
+    }, 600);
   }
 
   function spawnHeart() {
@@ -581,9 +581,9 @@
     heart.className = 'click-heart';
     heart.textContent = '💖';
     
-    // Позиция по X и Y (с учетом отступов)
+    // Позиция по X и Y (с учетом отступов, чтобы не улетали за экран)
     const x = Math.random() * (window.innerWidth - 60);
-    const y = Math.random() * (window.innerHeight - 60);
+    const y = Math.random() * (window.innerHeight - 100);
     
     heart.style.left = x + 'px';
     heart.style.top = y + 'px';
@@ -599,13 +599,13 @@
       }
     });
 
-    // Удаляем сердечко, если на него не нажали (живет 800мс)
+    // Удаляем сердечко, если на него не нажали (теперь живет 1500 мс)
     setTimeout(() => {
       if (heart.parentNode) {
         heart.style.opacity = '0';
-        setTimeout(() => heart.remove(), 100);
+        setTimeout(() => heart.remove(), 200);
       }
-    }, 800);
+    }, 1500);
 
     playArea.appendChild(heart);
   }
